@@ -30,49 +30,67 @@ export default function Post() {
     });
   };
 
-  return post ? (
-    <div className="py-12 bg-gray-50">
-      <Container>
+  if (!post)
+    return (
+      <div className="text-center text-gray-400 py-20 text-lg">
+        Loading post...
+      </div>
+    );
+
+  return (
+    <div className="py-8 md:py-12 bg-gray-50 min-h-full">
+      <Container className="max-w-4xl mx-auto px-4 md:px-0">
         {/* Featured Image */}
         {post.featuredImage && (
-          <div className="w-full flex justify-center mb-6 relative rounded-xl overflow-hidden shadow-md">
-            <img
-              src={service.getFileUrl(post.featuredImage)}
-              alt={post.title}
-              className="rounded-xl object-cover w-full max-h-[500px]"
-            />
+  <div className="relative mb-8 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 flex justify-center">
+    <img
+      src={service.getFileUrl(post.featuredImage)}
+      alt={post.title}
+      className="w-full max-w-3xl h-auto object-cover rounded-2xl"
+    />
 
-            {isAuthor && (
-              <div className="absolute top-4 right-4 flex space-x-3">
-                <Link to={`/edit-post/${post.$id}`}>
-                  <Button bgColor="bg-green-500" className="hover:bg-green-600">
-                    Edit
-                  </Button>
-                </Link>
-                <Button
-                  bgColor="bg-red-500"
-                  className="hover:bg-red-600"
-                  onClick={deletePost}
-                >
-                  Delete
-                </Button>
-              </div>
+    {isAuthor && (
+      <div className="absolute top-4 right-4 flex space-x-3">
+        <Link to={`/edit-post/${post.$id}`}>
+          <Button
+            bgColor="bg-green-500"
+            className="hover:bg-green-600 transition-colors"
+          >
+            Edit
+          </Button>
+        </Link>
+        <Button
+          bgColor="bg-red-500"
+          className="hover:bg-red-600 transition-colors"
+          onClick={deletePost}
+        >
+          Delete
+        </Button>
+      </div>
+    )}
+  </div>
+)}
+
+        {/* Title */}
+        <h1 className="text-3xl md:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
+          {post.title}
+        </h1>
+
+        {/* Author & Date */}
+        {post.userName && (
+          <div className="mb-6 text-gray-500 text-sm md:text-base flex flex-wrap gap-2">
+            <span>By {post.userName}</span>
+            {post.createdAt && (
+              <span>• {new Date(post.createdAt).toLocaleDateString()}</span>
             )}
           </div>
         )}
 
-        {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-6 text-gray-800">
-          {post.title}
-        </h1>
-
-        {/* Content */}
-        <div className="prose max-w-none text-gray-700">
+        {/* Post Content */}
+        <div className="prose prose-lg md:prose-xl max-w-none text-gray-800 prose-a:text-blue-600 hover:prose-a:text-blue-800 transition-colors">
           {parse(post.content)}
         </div>
       </Container>
     </div>
-  ) : (
-    <div className="py-20 text-center text-gray-500">Loading post...</div>
   );
 }

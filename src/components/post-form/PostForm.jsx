@@ -131,12 +131,12 @@ function PostForm({ post }) {
     )}
 
     <Select
-      options={["active", "inactive"]}
-      label="Status :"
-      placeholder="Select Status"
-      className="mb-4"
-      {...register("status", { required: true })}
-    />
+  options={["active", "inactive"]}
+  label="Status :"
+  placeholder="Select Status"
+  className="mb-4"
+  {...register("status", { required: true })}
+/>
 
     <Button
       type="submit"
