@@ -21,6 +21,10 @@ function Home() {
           <p className="text-gray-500">
             Explore amazing content once you sign in.
           </p>
+          <br />
+          <p>
+            Vibeboard is a space to share your favorite photos and explore what others are posting.  <br />Discover, connect, and get inspired by a community that celebrates creativity and visual expression.
+          </p>
         </Container>
       </div>
     );

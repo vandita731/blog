@@ -1,7 +1,8 @@
-import React from 'react'
-import { Container, Logo, LogoutBtn } from '../index'
-import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { Container, Logo, LogoutBtn } from '../index';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Button from '../Button'; // <-- import your reusable Button
 
 function Header() { 
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Header() {
     { name: "Signup", slug: "/signup", active: !authStatus },
     { name: "All Posts", slug: "/all-post", active: authStatus },
     { name: "Add Post", slug: "/add-post", active: authStatus },
+    { name: "Your Posts", slug: "/your-posts", active: authStatus }, // new page
   ];
 
   return (
@@ -33,14 +35,14 @@ function Header() {
               (item) =>
                 item.active && (
                   <li key={item.name}>
-                    <button
+                    <Button
+                      bgColor="bg-white/20"
+                      textColor="text-white"
+                      className="hover:bg-white hover:text-indigo-600"
                       onClick={() => navigate(item.slug)}
-                      className="px-5 py-2 rounded-full text-white font-medium
-                        hover:bg-white hover:text-indigo-600 
-                        transition duration-300 ease-in-out"
                     >
                       {item.name}
-                    </button>
+                    </Button>
                   </li>
                 )
             )}
@@ -53,7 +55,7 @@ function Header() {
         </nav>
       </Container>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
