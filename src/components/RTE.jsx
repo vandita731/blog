@@ -1,6 +1,17 @@
 import React from 'react';
-import { Editor } from '@tinymce/tinymce-react';
 import { Controller } from 'react-hook-form';
+import { Editor } from '@tinymce/tinymce-react';
+import 'tinymce/tinymce';
+import 'tinymce/themes/silver';
+import 'tinymce/icons/default';
+import 'tinymce/plugins/advlist';
+import 'tinymce/plugins/autolink';
+import 'tinymce/plugins/lists';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/charmap';
+import 'tinymce/plugins/preview';
+import 'tinymce/plugins/code';
 
 export default function RTE({ name, control, label, defaultValue = "" }) {
   const id = `rte-${name}`;
@@ -14,9 +25,6 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
-            id={id}
-            apiKey="9zn9etqo1r9of90pa1rrakhnraltv9wb5jxc83pthzzy8fw7"
-            initialValue={defaultValue}
             init={{
               height: 500,
               menubar: true,
@@ -27,7 +35,6 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
               toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help",
               content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
             }}
-            onEditorChange={onChange}
           />
         )}
       />
